@@ -33,7 +33,7 @@ void ProcessErrorRegex::setupPatterns() {
 	_indexerRegex.append(QRegularExpression(QString("vkAllocateMemory\\sfailed")));
 	_indexerRegex.append(QRegularExpression(QString("vkQueueSubmit\\sfailed")));
 	_indexerRegex.append(QRegularExpression(QString("not\\senough\\sframes\\sto\\sestimate\\srate;\\sconsider\\sincreasing\\sprobesize")));
-	_indexerRegex.append(QRegularExpression(QString("(?:lib)?rife\\.dll.\\sGetLastError\\(\\)\\sreturned\\s126.\\sThe\\sfile\\syou\\stried\\sto\\sload\\sor\\sone\\sof\\sits\\sdependencies\\sis\\sprobably\\smissing\\.")));
+	_indexerRegex.append(QRegularExpression(QString("(?:librife_windows_x86-64|librife|rife)\\.dll.\\sGetLastError\\(\\)\\sreturned\\s126.\\sThe\\sfile\\syou\\stried\\sto\\sload\\sor\\sone\\sof\\sits\\sdependencies\\sis\\sprobably\\smissing\\.")));
 	_indexerRegex.append(QRegularExpression(QString("\\[h264_nvenc\\s@\\s\\w*\\]\\s[0-9]*\\sbit\\sencode\\snot\\ssupported")));
 	_indexerRegex.append(QRegularExpression(QString("The\\spaging\\sfile\\sis\\stoo\\ssmall\\sfor\\sthis\\soperation\\sto\\scomplete")));
 	_indexerRegex.append(QRegularExpression(QString("\\)\\sis\\snot\\ssupported\\sby\\sthe\\sbitstream\\sfilter\\s'hevc_mp4toannexb'.")));

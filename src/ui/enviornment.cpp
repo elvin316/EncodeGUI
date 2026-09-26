@@ -55,7 +55,8 @@ QString EncodeGUI::checkEnviornment() {
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\liblsmashsource.dll"))).exists()) return(QString("liblsmashsource.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\libeedi2.dll"))).exists()) return(QString("libeedi2.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\librife.dll"))).exists() &&
-	    !QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\rife.dll"))).exists())
+	    !QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\rife.dll"))).exists() &&
+	    !QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\librife_windows_x86-64.dll"))).exists())
 		return(QString("librife.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\librealsrnv.dll"))).exists()) return(QString("librealsrnv.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\libwaifu2x.dll"))).exists()) return(QString("libwaifu2x.dll"));

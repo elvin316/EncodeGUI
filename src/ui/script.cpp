@@ -164,7 +164,9 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 	}
 	if (CHECKED(_ui->InterpolationCB)) {
 		if (_ui->BackendDD->currentIndex() == 1) {
-			if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\rife.dll"))).exists())
+			if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\librife_windows_x86-64.dll"))).exists())
+				ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\librife_windows_x86-64.dll")));
+			else if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\rife.dll"))).exists())
 				ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\rife.dll")));
 			else
 				ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\librife.dll")));
@@ -186,7 +188,11 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 		ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/libsrmdnv.dylib")));
 	}
 	if (CHECKED(_ui->InterpolationCB)) {
-		if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/rife.dylib"))).exists())
+		if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/librife_darwin_arm64.dylib"))).exists())
+			ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/librife_darwin_arm64.dylib")));
+		else if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/librife_darwin_x86-64.dylib"))).exists())
+			ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/librife_darwin_x86-64.dylib")));
+		else if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/rife.dylib"))).exists())
 			ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/rife.dylib")));
 		else
 			ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/librife.dylib")));
