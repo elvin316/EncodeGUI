@@ -163,8 +163,12 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 		ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\librealsrnv.dll")));
 	}
 	if (CHECKED(_ui->InterpolationCB)) {
-		if (_ui->BackendDD->currentIndex() == 1)
-			ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\librife.dll")));
+		if (_ui->BackendDD->currentIndex() == 1) {
+			if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\rife.dll"))).exists())
+				ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\rife.dll")));
+			else
+				ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\librife.dll")));
+		}
 		
 		ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\libsvpflow.1.dll")));
 		ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\libsvpflow.2.dll")));
@@ -181,8 +185,12 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 		ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/libvsw2xnvk.dylib")));
 		ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/libsrmdnv.dylib")));
 	}
-	if (CHECKED(_ui->InterpolationCB))
-		ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/librife.dylib")));
+	if (CHECKED(_ui->InterpolationCB)) {
+		if (QFile(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/rife.dylib"))).exists())
+			ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/rife.dylib")));
+		else
+			ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("/plugins/librife.dylib")));
+	}
 	#endif
 
 	ScriptBuilder::setInput(input, jobID);
@@ -279,16 +287,16 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 				#ifdef Q_OS_DARWIN
 				if (_ui->ToolInterpDD->currentIndex() == 0) {
 				#endif
-					if (_ui->RIFEModelVKDD->currentIndex() < 4)
+					if (_ui->RIFEModelVKDD->currentIndex() < 9)
 						ScriptBuilder::setRIFENcnn(model, id, thread, tta, uhd, sc);
 					else
 						ScriptBuilder::setRIFENcnnNew(model, id, thread, num, den, tta, uhd, sc);
 				}
 				else
 					if (model2 == 0)
-						ScriptBuilder::setRIFENcnnNew(5, id, thread, QString("%1").arg(multI * inFPS).remove(QString(".")).toInt(), den, tta, uhd, sc);
+						ScriptBuilder::setRIFENcnnNew(23, id, thread, QString("%1").arg(multI * inFPS).remove(QString(".")).toInt(), den, tta, uhd, sc);
 					else if (model2 == 1)
-						ScriptBuilder::setRIFENcnn(1, id, thread, tta, uhd, sc);
+						ScriptBuilder::setRIFENcnn(5, id, thread, tta, uhd, sc);
 					else if (model2 == 2)
 						ScriptBuilder::setRIFENcnn(0, id, thread, tta, uhd, sc);
 				break;

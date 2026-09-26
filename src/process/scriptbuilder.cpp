@@ -25,12 +25,12 @@ void ScriptBuilder::setRIFECuda(int id, double model, int num, int den, double s
 }
 #endif
 
-void ScriptBuilder::setRIFENcnn(int model, int id, int thread, QString tta, QString uhd, QString sc) {
-	_scriptList.append(VapourSynth::rifeNcnn(model, id, thread, tta, uhd, sc));
+void ScriptBuilder::setRIFENcnn(int model, int id, int thread, QString tta, QString uhd, QString sc, bool skip, double skipThreshold, const QString &modelPath) {
+	_scriptList.append(VapourSynth::rifeNcnn(model, id, thread, tta, uhd, sc, skip, skipThreshold, modelPath));
 }
 
-void ScriptBuilder::setRIFENcnnNew(int model, int id, int thread, int num, int den, QString tta, QString uhd, QString sc) {
-	_scriptList.append(VapourSynth::rifeNcnnNew(model, id, thread, num, den, tta, uhd, sc));
+void ScriptBuilder::setRIFENcnnNew(int model, int id, int thread, int num, int den, QString tta, QString uhd, QString sc, bool skip, double skipThreshold, const QString &modelPath) {
+	_scriptList.append(VapourSynth::rifeNcnnNew(model, id, thread, num, den, tta, uhd, sc, skip, skipThreshold, modelPath));
 }
 
 #ifdef Q_OS_WINDOWS

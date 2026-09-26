@@ -31,7 +31,7 @@ void EncodeGUI::hideInterpGpu() {
 }
 
 void EncodeGUI::modelVK() {
-    if (_ui->RIFEModelVKDD->currentIndex() < 4) {
+    if (_ui->RIFEModelVKDD->currentIndex() < 9) {
         SET_VISIBLE(_ui->Times2Label);
         
         #ifdef Q_OS_WINDOWS

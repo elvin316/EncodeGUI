@@ -1,0 +1,48 @@
+name: Build Windows Binary
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Windows x64 Binary
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSVC Environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Install Qt 6
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.2.4'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+
+      - name: Configure and Build with qmake
+        shell: cmd
+        run: |
+          qmake egui_windows.pro -spec win32-msvc "CONFIG+=release"
+          nmake
+
+      - name: Deploy Qt Runtime Libraries
+        shell: cmd
+        run: |
+          cd x64\Release
+          windeployqt --release --no-translations --compiler-runtime EncodeGUI.exe
+
+      - name: Upload Windows Executable Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: EncodeGUI-Windows-x64
+          path: x64/Release/

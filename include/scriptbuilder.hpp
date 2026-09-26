@@ -27,8 +27,8 @@
 class ScriptBuilder : protected VapourSynth {
 public:
 	static QString getScript();
-	static void setRIFENcnn(int model, int id, int thread, QString tta, QString uhd, QString sc);
-	static void setRIFENcnnNew(int model, int id, int thread, int num, int den, QString tta, QString uhd, QString sc);
+	static void setRIFENcnn(int model, int id, int thread, QString tta, QString uhd, QString sc, bool skip = false, double skipThreshold = 60.0, const QString &modelPath = QString());
+	static void setRIFENcnnNew(int model, int id, int thread, int num, int den, QString tta, QString uhd, QString sc, bool skip = false, double skipThreshold = 60.0, const QString &modelPath = QString());
 	static void setWaifu2x(int noise, int scale, int model, int id, int thread, int precision, bool dual, int gpu1, int gpu2);
 
 	#ifdef Q_OS_DARWIN

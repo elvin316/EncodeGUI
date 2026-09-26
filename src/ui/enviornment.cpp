@@ -54,11 +54,18 @@ QString EncodeGUI::checkEnviornment() {
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vapoursynth64\\coreplugins\\miscfilters.dll"))).exists()) return(QString("miscfilters.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\liblsmashsource.dll"))).exists()) return(QString("liblsmashsource.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\libeedi2.dll"))).exists()) return(QString("libeedi2.dll"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\librife.dll"))).exists()) return(QString("librife.dll"));
+	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\librife.dll"))).exists() &&
+	    !QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\rife.dll"))).exists())
+		return(QString("librife.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\librealsrnv.dll"))).exists()) return(QString("librealsrnv.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\libwaifu2x.dll"))).exists()) return(QString("libwaifu2x.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\libsvpflow.1.dll"))).exists()) return(QString("libsvpflow.1.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\libsvpflow.2.dll"))).exists()) return(QString("libsvpflow.2.dll"));
+	if (!QDir(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models"))).exists()) return(QString("RIFE models"));
+	bool hasStylerRife = QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife-v4.6_ensembleFalse\\flownet.param"))).exists() ||
+	                     QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife-v4.26_ensembleFalse\\flownet.param"))).exists() ||
+	                     QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife\\flownet.param"))).exists();
+	if (!hasStylerRife) {
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife-v4.6\\flownet.bin"))).exists()) return(QString("RIFE model v4.6"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife-v4.6\\flownet.param"))).exists()) return(QString("RIFE model v4.6"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife-v4\\flownet.bin"))).exists()) return(QString("RIFE model v4.0"));
@@ -87,6 +94,7 @@ QString EncodeGUI::checkEnviornment() {
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife-v1.8\\contextnet.param"))).exists()) return(QString("RIFE model v1.8"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife-v1.8\\fusionnet.bin"))).exists()) return(QString("RIFE model v1.8"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models\\rife-v1.8\\fusionnet.param"))).exists()) return(QString("RIFE model v1.8"));
+	}
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models-realsr\\realsr-x4.bin"))).exists()) return(QString("RealSR models"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models-realsr\\realsr-x4.param"))).exists()) return(QString("RealSR models"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\plugins\\models-cunet\\noise0_model.bin"))).exists()) return(QString("CUNET models"));

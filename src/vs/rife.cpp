@@ -44,23 +44,39 @@ QString VapourSynth::rifeCuda(int id, double model, int num, int den, double sca
 /// <param name="tta">Enables test time augmentation for better interpolation quality.</param>
 /// <param name="uhd">Enables or disabled UHD mode for better frame rendering.</param>
 /// <param name="sc">Enables or disables scene change detection.</param>
+/// <param name="skip">Skip interpolating static frames (requires VMAF plugin).</param>
+/// <param name="skipThreshold">PSNR threshold for static frames.</param>
+/// <param name="modelPath">Custom model path to load model from.</param>
 /// <returns>String representation of the argument.</returns>
-QString VapourSynth::rifeNcnn(int model, int id, int thread, QString tta, QString uhd, QString sc) {
-	return(QString("clip = core.rife.RIFE(clip, model=%1, gpu_id=%2, gpu_thread=%3, tta=%4, uhd=%5, sc=%6)\n\n").arg(model).arg(id).arg(thread).arg(tta).arg(uhd).arg(sc));
+QString VapourSynth::rifeNcnn(int model, int id, int thread, QString tta, QString uhd, QString sc, bool skip, double skipThreshold, const QString &modelPath) {
+	QString extras;
+	if (skip)
+		extras += QString(", skip=True, skip_threshold=%1").arg(skipThreshold);
+	if (!modelPath.isEmpty())
+		extras += QString(", model_path=r\"%1\"").arg(QString(modelPath).replace(QString("\\"), QString("/")));
+	return(QString("clip = core.rife.RIFE(clip, model=%1, gpu_id=%2, gpu_thread=%3, tta=%4, uhd=%5, sc=%6%7)\n\n").arg(model).arg(id).arg(thread).arg(tta).arg(uhd).arg(sc).arg(extras));
 }
 
 /// <summary>
-/// 
+/// Configures RIFE in it's NCNN implementation with custom output FPS.
 /// </summary>
 /// <param name="model">Sets the model index to use.</param>
 /// <param name="id">Sets the GPU id index to use.</param>
 /// <param name="thread">Sets the number of GPU threads to use.</param>
-/// <param name="num"></param>
-/// <param name="den"></param>
+/// <param name="num">Numerator for output FPS.</param>
+/// <param name="den">Denominator for output FPS.</param>
 /// <param name="tta">Enables test time augmentation for better interpolation quality.</param>
 /// <param name="uhd">Enables or disabled UHD mode for better frame rendering.</param>
 /// <param name="sc">Enables or disables scene change detection.</param>
+/// <param name="skip">Skip interpolating static frames (requires VMAF plugin).</param>
+/// <param name="skipThreshold">PSNR threshold for static frames.</param>
+/// <param name="modelPath">Custom model path to load model from.</param>
 /// <returns>String representation of the argument.</returns>
-QString VapourSynth::rifeNcnnNew(int model, int id, int thread, int num, int den, QString tta, QString uhd, QString sc) {
-	return(QString("clip = core.rife.RIFE(clip, model=%1, gpu_id=%2, gpu_thread=%3, fps_num=%4, fps_den=%5, tta=%6, uhd=%7, sc=%8)\n\n").arg(model).arg(id).arg(thread).arg(num).arg(den).arg(tta).arg(uhd).arg(sc));
+QString VapourSynth::rifeNcnnNew(int model, int id, int thread, int num, int den, QString tta, QString uhd, QString sc, bool skip, double skipThreshold, const QString &modelPath) {
+	QString extras;
+	if (skip)
+		extras += QString(", skip=True, skip_threshold=%1").arg(skipThreshold);
+	if (!modelPath.isEmpty())
+		extras += QString(", model_path=r\"%1\"").arg(QString(modelPath).replace(QString("\\"), QString("/")));
+	return(QString("clip = core.rife.RIFE(clip, model=%1, gpu_id=%2, gpu_thread=%3, fps_num=%4, fps_den=%5, tta=%6, uhd=%7, sc=%8%9)\n\n").arg(model).arg(id).arg(thread).arg(num).arg(den).arg(tta).arg(uhd).arg(sc).arg(extras));
 }

@@ -4260,9 +4260,9 @@
           <widget class="QComboBox" name="RIFEModelVKDD">
            <property name="geometry">
             <rect>
-             <x>430</x>
+             <x>220</x>
              <y>95</y>
-             <width>71</width>
+             <width>281</width>
              <height>22</height>
             </rect>
            </property>
@@ -4270,36 +4270,376 @@
             <enum>Qt::NoFocus</enum>
            </property>
            <property name="toolTip">
-            <string>Sets the RIFE model to use for NCNN.</string>
+            <string>Sets the RIFE model to use for NCNN (supports styler00dollar/VapourSynth-RIFE-ncnn-Vulkan).</string>
            </property>
            <item>
             <property name="text">
-             <string>v1.8</string>
+             <string>rife</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>v2.3</string>
+             <string>rife-HD</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>v2.4</string>
+             <string>rife-UHD</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>v3.1</string>
+             <string>rife-anime</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>v4.0</string>
+             <string>rife-v2</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>v4.6</string>
+             <string>rife-v2.3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v2.4</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v3.0</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v3.1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v3.9 (fast)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v3.9 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4 (fast)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.1 (fast)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.1 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.2 (fast)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.2 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.3 (fast)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.3 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.4 (fast)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.4 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.5</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.5 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.6</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.6 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.7</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.7 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.8</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.8 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.9</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.9 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.10</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.10 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.11</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.11 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.12</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.12 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.12-lite</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.12-lite (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.13</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.13 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.13-lite</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.13-lite (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.14</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.14 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.14-lite</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.14-lite (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.15</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.15 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.15-lite</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.15-lite (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.16-lite</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.16-lite (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.17</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.17 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.17-lite</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.17-lite (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.18</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.18 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.19-beta</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.19-beta (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.20</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.20 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.21</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.22</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.22-lite</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.23-beta</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.24</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.24 (ensemble)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.25</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.25-lite</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.25-heavy</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.26</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>rife-v4.26-large</string>
             </property>
            </item>
           </widget>
