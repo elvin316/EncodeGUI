@@ -62,8 +62,6 @@ EncodeGUI::EncodeGUI(QWidget *parent) : QMainWindow(parent) {
     connect(_ui->ClearJobsBttn, SIGNAL(clicked(bool)), this, SLOT(clearFinished()));
     connect(_ui->AddAudioJobBttn, SIGNAL(clicked(bool)), this, SLOT(addAudioJob()));
     connect(_ui->RIFEModelVKDD, SIGNAL(currentIndexChanged(int)), this, SLOT(modelVK()));
-    _ui->RIFEModelVKDD->setCurrentIndex(72);
-    modelVK();
     connect(_ui->LogsDirBttn, SIGNAL(clicked(bool)), this, SLOT(openLogs()));
     connect(_ui->PreviewBttn, SIGNAL(clicked(bool)), this, SLOT(openPreview()));
     connect(_ui->AutoAdjCB, SIGNAL(stateChanged(int)), this, SLOT(autoAjustU()));
@@ -1069,6 +1067,13 @@ void EncodeGUI::regexFinished() {
     #ifdef Q_OS_WINDOWS
     toolInterp();
     #endif
+
+    if (!VideoInfo::getFrameRate().isEmpty() && !VideoInfo::getFrameRate().contains(QString("?"))) {
+        double inFps = VideoInfo::getFrameRate().toDouble();
+        if (inFps > 0.0) {
+            _ui->OutputFPSNUD->setValue(inFps * 2.0);
+        }
+    }
 
     if (!CHECKED(_ui->InterpolationCB)) {
         _ui->InterpolationCB->setChecked(true);

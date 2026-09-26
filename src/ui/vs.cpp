@@ -31,6 +31,13 @@ void EncodeGUI::hideInterpGpu() {
 }
 
 void EncodeGUI::modelVK() {
+    if (!VideoInfo::getFrameRate().isEmpty() && !VideoInfo::getFrameRate().contains(QString("?"))) {
+        double inFps = VideoInfo::getFrameRate().toDouble();
+        if (inFps > 0.0) {
+            _ui->OutputFPSNUD->setValue(inFps * 2.0);
+        }
+    }
+
     if (_ui->RIFEModelVKDD->currentIndex() < 9) {
         SET_VISIBLE(_ui->Times2Label);
         
@@ -39,8 +46,6 @@ void EncodeGUI::modelVK() {
         #endif
 
         SET_DISABLED(_ui->OutputFPSNUD);
-
-        _ui->OutputFPSNUD->setValue(static_cast<double>(VideoInfo::getFrameRate().toDouble()) * 2.0);
     }
     else {
         SET_INVISIBLE(_ui->Times2Label);
