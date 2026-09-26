@@ -32,6 +32,7 @@ jobs:
       - name: Configure and Build with qmake
         shell: cmd
         run: |
+          if not exist x64\Release mkdir x64\Release
           qmake egui_windows.pro -spec win32-msvc "CONFIG+=release"
           nmake
 

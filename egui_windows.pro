@@ -4,12 +4,20 @@ TARGET = EncodeGUI
 DESTDIR = ./x64/Release
 CONFIG += release
 CONFIG -= debug
-LIBS += -L"."
-DEPENDPATH += .
+CONFIG += windows
+
 INCLUDEPATH += ./include
-MOC_DIR += ./x64/Release
-OBJECTS_DIR += ./x64/Release
-RC_FILE = ./assets/EncodeGUI.rc
+DEPENDPATH += .
+
+MOC_DIR = ./x64/Release
+OBJECTS_DIR = ./x64/Release
+
+win32 {
+    LIBS += -lole32 -lshell32 -luuid -ldxgi -luser32 -lopengl32 -L"."
+    RC_FILE = ./assets/EncodeGUI.rc
+    RC_INCLUDEPATH += ./assets
+    QMAKE_CXXFLAGS += /MP /utf-8
+}
 
 HEADERS += ./include/args.hpp \
     ./include/checks.hpp \
