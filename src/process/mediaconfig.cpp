@@ -166,6 +166,11 @@ void MediaConfig::setConstantQuantizer(int strength) {
 		_argumentList.append(argument);
 }
 
+void MediaConfig::setConstantQP(int qp) {
+	foreach(QString argument, splitSpace(Argument::constantQP(qp)))
+		_argumentList.append(argument);
+}
+
 void MediaConfig::setQuantizer(int strength) {
 	foreach(QString argument, splitSpace(Argument::quantizer(strength)))
 		_argumentList.append(argument);

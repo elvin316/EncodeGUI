@@ -66,6 +66,7 @@ protected:
 	static QString audioBitrate(int bitrate, int stream);
 	static QString constantRateFactor(int crf);
 	static QString constantQuantizer(int strength);
+	static QString constantQP(int qp);
 	static QString quantizer(int strength);
 	static QString buffer(int bitrate);
 	static QString constantVideoQuality(int quality);

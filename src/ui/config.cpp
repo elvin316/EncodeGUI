@@ -349,7 +349,7 @@ QStringList EncodeGUI::configureArgs(QString input, int index, QString container
 					MediaConfig::setPass(pass);
 			}
 			else
-				MediaConfig::setConstantQuantizer(_ui->Quantizer264NUD->value());
+				MediaConfig::setConstantQP(_ui->Quantizer264NUD->value());
 
 			if (CHECKED(_ui->Tune264CB))
 				MediaConfig::setVideoTune(_ui->Tune264DD->currentText().remove(QString(" ")).toLower());
@@ -421,7 +421,7 @@ QStringList EncodeGUI::configureArgs(QString input, int index, QString container
 			else if (_ui->EncodeMode265DD->currentIndex() == 1 || _ui->EncodeMode265DD->currentIndex() == 2)
 				MediaConfig::setVideoBitrate(_ui->Bitrate265NUD->value());
 			else
-				MediaConfig::setConstantQuantizer(_ui->Quantizer265NUD->value());
+				MediaConfig::setConstantQP(_ui->Quantizer265NUD->value());
 
 			if (CHECKED(_ui->Tune265CB))
 				MediaConfig::setVideoTune(_ui->Tune265DD->currentText().toLower().remove(QString(" ")));
@@ -661,7 +661,7 @@ QStringList EncodeGUI::configureArgs(QString input, int index, QString container
 		MediaConfig::setVideoCodec(QString("libsvtav1"));
 		#endif
 		#ifdef Q_OS_DARWIN
-		MediaConfig::setVideoCodec(QString("libaom-av1"));
+		MediaConfig::setVideoCodec(QString("libsvtav1"));
 		#endif
 
 		switch (_ui->EncodeModeAV1DD->currentIndex()) {

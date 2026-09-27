@@ -25,16 +25,23 @@ QString EncodeGUI::checkEnviornment() {
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\tls\\qopensslbackend.dll"))).exists()) return(QString("qopensslbackend.dll"));
 
 	// lib
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avcodec-60.dll"))).exists()) return(QString("avcodec-60.dll"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avdevice-60.dll"))).exists()) return(QString("avdevice-60.dll"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avfilter-9.dll"))).exists()) return(QString("avfilter-9.dll"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avformat-60.dll"))).exists()) return(QString("avformat-60.dll"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avutil-58.dll"))).exists()) return(QString("avutil-58.dll"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\ffmpeg.exe"))).exists()) return(QString("ffmpeg.exe"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\ffprobe.exe"))).exists()) return(QString("ffprobe.exe"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\postproc-57.dll"))).exists()) return(QString("postproc-57.dll"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\swresample-4.dll"))).exists()) return(QString("swresample-4.dll"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\swscale-7.dll"))).exists()) return(QString("swscale-7.dll"));
+
+	bool hasFfmpeg7 = QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avcodec-61.dll"))).exists();
+	bool hasFfmpeg6 = QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avcodec-60.dll"))).exists();
+
+	if (hasFfmpeg7) {
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avformat-61.dll"))).exists()) return(QString("avformat-61.dll"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avutil-59.dll"))).exists()) return(QString("avutil-59.dll"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\swresample-5.dll"))).exists()) return(QString("swresample-5.dll"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\swscale-8.dll"))).exists()) return(QString("swscale-8.dll"));
+	} else if (hasFfmpeg6) {
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avformat-60.dll"))).exists()) return(QString("avformat-60.dll"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\avutil-58.dll"))).exists()) return(QString("avutil-58.dll"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\swresample-4.dll"))).exists()) return(QString("swresample-4.dll"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\lib\\swscale-7.dll"))).exists()) return(QString("swscale-7.dll"));
+	}
 
 	// vs
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\_ctypes.pyd"))).exists()) return(QString("_ctypes.pyd"));
@@ -176,14 +183,17 @@ QString EncodeGUI::checkEnviornment() {
 	// lib
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/ffmpeg"))).exists()) return(QString("ffmpeg"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/ffprobe"))).exists()) return(QString("ffprobe"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavcodec.dylib"))).exists()) return(QString("libavcodec.dylib"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavdevice.dylib"))).exists()) return(QString("libavdevice.dylib"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavfilter.dylib"))).exists()) return(QString("libavfilter.dylib"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavformat.dylib"))).exists()) return(QString("libavformat.dylib"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavutil.dylib"))).exists()) return(QString("libavutil.dylib"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libpostproc.dylib"))).exists()) return(QString("libpostproc.dylib"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libswresample.dylib"))).exists()) return(QString("libswresample.dylib"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libswscale.dylib"))).exists()) return(QString("libswscale.dylib"));
+	bool hasSharedAvcodec = QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavcodec.dylib"))).exists() ||
+	                        QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavcodec.60.dylib"))).exists() ||
+	                        QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavcodec.61.dylib"))).exists();
+	if (hasSharedAvcodec) {
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavformat.dylib"))).exists() &&
+		    !QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavformat.60.dylib"))).exists() &&
+		    !QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavformat.61.dylib"))).exists()) return(QString("libavformat.dylib"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavutil.dylib"))).exists() &&
+		    !QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavutil.58.dylib"))).exists() &&
+		    !QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libavutil.59.dylib"))).exists()) return(QString("libavutil.dylib"));
+	}
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("/lib/libvapoursynth.dylib"))).exists()) return(QString("libvapoursynth.dylib"));
 
 	// py

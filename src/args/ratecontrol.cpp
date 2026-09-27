@@ -54,6 +54,15 @@ QString Argument::constantQuantizer(int strength) {
 }
 
 /// <summary>
+/// Sets the constant quantization parameter for software encoders (e.g. libx264, libx265).
+/// </summary>
+/// <param name="qp">The QP value.</param>
+/// <returns>String representation of the argument.</returns>
+QString Argument::constantQP(int qp) {
+	return(QString("-qp %1").arg(qp));
+}
+
+/// <summary>
 /// Sets the constant quantization for GPU encoders.
 /// </summary>
 /// <param name="strength">The quantizaton strength.</param>

@@ -75,6 +75,7 @@ public:
 	static void setAudioBitrate(int bitrate, int stream);
 	static void setConstantRateFactor(int crf);
 	static void setConstantQuantizer(int strength);
+	static void setConstantQP(int qp);
 	static void setQuantizer(int strength);
 	static void setConstantVideoQuality(int quality);
 	static void setConstantAudioQuality(int quality, int stream);
