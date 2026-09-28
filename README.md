@@ -19,10 +19,19 @@ Below is a list of key features in EnocdeGUI **that other competing software lac
 - Multi-GPU processing support for resource demanding filters (Waifu2x and SRMD/RealSR).
 - Built-in and fully customizable audio AND subtitle encoding options.
 - Features Intel hardware accelerated AV1 encoding. 
-- Features the latest, exclusive AI and non-AI frame interpolation options: RIFE (NCNN/CUDA), EncodeGUI AI (NCNN/CUDA), SVPFlow (OpenGL)
+- Features the latest, exclusive AI and non-AI frame interpolation options: RIFE (NCNN Vulkan / CUDA HolyWu / TensorRT), EncodeGUI AI, SVPFlow (OpenGL)
+- Dynamic model detection: models are scanned directly from disk to keep dropdown menus decluttered.
 - Full HDR10(+) support with configurations allowing you to convert SDR videos to HDR, and visa versa.
 - Dolby Vision support (beta).
 - Features VapourSynth filtering for ALL filters which **doesn't extract frames before rendering, allowing a faster render than nearly all competing software**.
+
+# RIFE Frame Interpolation (NCNN, CUDA, TensorRT)
+EncodeGUI supports three modes for RIFE video interpolation:
+- **NCNN / Vulkan**: Works out-of-the-box on Windows and macOS across NVIDIA, AMD, and Intel GPUs. Supports up to 74 models.
+- **CUDA (HolyWu `vs-rife`)**: PyTorch-based CUDA acceleration for NVIDIA GPUs supporting 36 models (`v4.0` through `v4.26`).
+- **TensorRT**: Hardware-optimized neural network compilation for NVIDIA RTX GPUs providing maximum interpolation speed.
+
+For detailed setup instructions, PyTorch/TensorRT packages installation, and model downloading, see the **[RIFE Setup Guide](docs/rife_setup_guide.md)**.
 
 # Usage
 Documentation including the basic usage guide can be found at https://encodegui.com/docs/documentation.
