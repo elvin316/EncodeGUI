@@ -4604,14 +4604,14 @@
           <widget class="QComboBox" name="RIFEModelCADD">
            <property name="geometry">
             <rect>
-             <x>437</x>
+             <x>226</x>
              <y>87</y>
-             <width>54</width>
+             <width>265</width>
              <height>22</height>
             </rect>
            </property>
            <property name="toolTip">
-            <string>Sets the RIFE model to use for CUDA.</string>
+            <string>Sets the RIFE model to use for CUDA (HolyWu vs-rife).</string>
            </property>
            <item>
             <property name="text">

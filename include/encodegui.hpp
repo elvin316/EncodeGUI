@@ -248,6 +248,7 @@ private slots:
     void subtitleFinished();
     void inputClick();
     void outputClick();
+    void refreshRifeModels();
     void hdrMeta();
     void errorMsg();
     void delSource();

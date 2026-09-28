@@ -227,11 +227,14 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 
 		tta = QString("False");
 
-		model = _ui->RIFEModelVKDD->currentIndex();
+		model = _ui->RIFEModelVKDD->currentData().isValid() ? _ui->RIFEModelVKDD->currentData().toInt() : _ui->RIFEModelVKDD->currentIndex();
 
 		#ifdef Q_OS_WINDOWS
 		model2 = _ui->ModelInterpDD->currentIndex();
-		model3 = _ui->RIFEModelCADD->currentText().remove(QString("v")).toDouble();
+		QString model3Str = _ui->RIFEModelCADD->currentData().isValid()
+			? _ui->RIFEModelCADD->currentData().toString()
+			: _ui->RIFEModelCADD->currentText().remove(QString("v"));
+		if (model3Str.isEmpty()) model3Str = QString("4.26");
 		#endif
 
 		thread = _ui->GPUThreadDD->currentIndex() + 1;
@@ -271,16 +274,13 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 			#ifdef Q_OS_WINDOWS
 			case 0:
 				if (_ui->ToolInterpDD->currentIndex() == 1) {
-					if (model3 == 4.0)
-						ScriptBuilder::setRIFECuda(id, model3, num, den, scale, sc, QString("False"));
-					else
-						ScriptBuilder::setRIFECuda(id, model3, num, den, scale, sc, QString("True"));
+					ScriptBuilder::setRIFECuda(id, model3Str, num, den, scale, sc, QString("False"));
 				}
 				else
 					if (model2 == 0)
-						ScriptBuilder::setRIFECuda(id, 4.6, QString("%1").arg(multI * inFPS).remove(QString(".")).toInt(), den, scale, sc, QString("False"));
+						ScriptBuilder::setRIFECuda(id, QString("4.6"), QString("%1").arg(multI * inFPS).remove(QString(".")).toInt(), den, scale, sc, QString("False"));
 					else if (model2 == 1)
-						ScriptBuilder::setRIFECuda(id, 4.0, QString("%1").arg(multI * inFPS).remove(QString(".")).toInt(), den, scale, sc, QString("True"));
+						ScriptBuilder::setRIFECuda(id, QString("4.0"), QString("%1").arg(multI * inFPS).remove(QString(".")).toInt(), den, scale, sc, QString("False"));
 				break;
 			case 1:
 			#endif
@@ -293,7 +293,7 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 				#ifdef Q_OS_DARWIN
 				if (_ui->ToolInterpDD->currentIndex() == 0) {
 				#endif
-					if (_ui->RIFEModelVKDD->currentIndex() < 9)
+					if (model < 9)
 						ScriptBuilder::setRIFENcnn(model, id, thread, tta, uhd, sc);
 					else
 						ScriptBuilder::setRIFENcnnNew(model, id, thread, num, den, tta, uhd, sc);

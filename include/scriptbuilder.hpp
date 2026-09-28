@@ -49,7 +49,7 @@ public:
 	static void clearScript();
 
 	#ifdef Q_OS_WINDOWS
-	static void setRIFECuda(int id, double model, int num, int den, double scale, QString sc, QString trt);
+	static void setRIFECuda(int id, QString model, int num, int den, double scale, QString sc, QString trt);
 	static void setSVPFlowNoob(QString useGPU, int id, int shader, int mask, int mode, int num, int den);
 	static void setSVPFlow(QString super, QString analyse, QString smooth, int num, int den);
 	#endif

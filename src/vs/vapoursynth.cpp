@@ -29,7 +29,7 @@ QString VapourSynth::plugin(QString path) {
 /// </summary>
 QString VapourSynth::include() {
 	#ifdef Q_OS_WINDOWS
-	return(QString("# This file was generated using EncodeGUI\n\nfrom vsrife import RIFE\nimport tempfile\nimport muvsfunc as mf\nimport vapoursynth as vs\nfrom vapoursynth import core\n\n"));
+	return(QString("# This file was generated using EncodeGUI\n\ntry:\n    from vsrife import rife as RIFE\nexcept ImportError:\n    try:\n        from vsrife import RIFE\n    except ImportError:\n        pass\nimport tempfile\nimport muvsfunc as mf\nimport vapoursynth as vs\nfrom vapoursynth import core\n\n"));
 	#endif
 	#ifdef Q_OS_DARWIN
 	return(QString("# This file was generated using EncodeGUI\n\nimport os\nimport muvsfunc as mf\nimport vapoursynth as vs\nfrom vapoursynth import core\n\n"));

@@ -46,7 +46,7 @@ protected:
 	static QString newLine();
 
 	#ifdef Q_OS_WINDOWS
-	static QString rifeCuda(int id, double model, int num, int den, double scale, QString sc, QString trt);
+	static QString rifeCuda(int id, QString model, int num, int den, double scale, QString sc, QString trt);
 	static QString svpFlowNoob(QString useGPU, int id, int shader, int mask, int mode, int num, int den);
 	static QString svpFlow(QString super, QString analyse, QString smooth, int num, int den);
 	#endif

@@ -150,12 +150,16 @@ QString EncodeGUI::checkEnviornment() {
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsutil\\info.py"))).exists()) return(QString("info.py"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsutil\\py.typed"))).exists()) return(QString("py.typed"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsutil\\types.py"))).exists()) return(QString("types.py"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\__init__.py"))).exists()) return(QString("vsrife"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\flownet_v4.6.pkl"))).exists()) return(QString("flownet_v4.6.pkl"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\flownet_v4.pkl"))).exists()) return(QString("flownet_v4.pkl"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\IFNet_HDv3_v4_0.py"))).exists()) return(QString("IFNet_HDv3_v4_0.py"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\IFNet_HDv3_v4_6.py"))).exists()) return(QString("IFNet_HDv3_v4_6.py"));
-	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\warplayer.py"))).exists()) return(QString("warplayer.py"));
+	bool hasVsrife = QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\__init__.py"))).exists() ||
+	                 QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\Lib\\site-packages\\vsrife\\__init__.py"))).exists();
+	if (!hasVsrife) return(QString("vsrife"));
+	bool hasLegacyVsrife = QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\IFNet_HDv3_v4_6.py"))).exists();
+	if (hasLegacyVsrife) {
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\flownet_v4.6.pkl"))).exists()) return(QString("flownet_v4.6.pkl"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\flownet_v4.pkl"))).exists()) return(QString("flownet_v4.pkl"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\IFNet_HDv3_v4_0.py"))).exists()) return(QString("IFNet_HDv3_v4_0.py"));
+		if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\warplayer.py"))).exists()) return(QString("warplayer.py"));
+	}
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\mvsfunc\\__init__.py"))).exists()) return(QString("mvsfunc"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\mvsfunc\\_metadata.py"))).exists()) return(QString("_metadata.py"));
 	if (!QFile(QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\mvsfunc\\mvsfunc.py"))).exists()) return(QString("mvsfunc.py"));

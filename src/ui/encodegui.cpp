@@ -62,6 +62,7 @@ EncodeGUI::EncodeGUI(QWidget *parent) : QMainWindow(parent) {
     connect(_ui->ClearJobsBttn, SIGNAL(clicked(bool)), this, SLOT(clearFinished()));
     connect(_ui->AddAudioJobBttn, SIGNAL(clicked(bool)), this, SLOT(addAudioJob()));
     connect(_ui->RIFEModelVKDD, SIGNAL(currentIndexChanged(int)), this, SLOT(modelVK()));
+    connect(_ui->RIFEModelCADD, SIGNAL(currentIndexChanged(int)), this, SLOT(modelVK()));
     connect(_ui->LogsDirBttn, SIGNAL(clicked(bool)), this, SLOT(openLogs()));
     connect(_ui->PreviewBttn, SIGNAL(clicked(bool)), this, SLOT(openPreview()));
     connect(_ui->AutoAdjCB, SIGNAL(stateChanged(int)), this, SLOT(autoAjustU()));
@@ -234,6 +235,8 @@ EncodeGUI::EncodeGUI(QWidget *parent) : QMainWindow(parent) {
     checkEncoders();
     getProcessor();
     #endif
+
+    refreshRifeModels();
 
     connect(_ui->AutoDelSourceCB, SIGNAL(stateChanged(int)), this, SLOT(delSource()));
 

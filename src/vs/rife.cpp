@@ -19,19 +19,22 @@
 
 #ifdef Q_OS_WINDOWS
 /// <summary>
-/// Configures RIFE in it's CUDA implementation.
+/// Configures RIFE in its CUDA implementation (HolyWu vs-rife).
 /// </summary>
-/// <param name="device">The type of device to use for frame rendering.</param>
-/// <param name="multi">Sets the interpolation multiplication factor.</param>
-/// <param name="scale">Sets the interpolation mode on the basis of the video's resolution.</param>
 /// <param name="id">Sets the GPU id index.</param>
-/// <param name="fp">Sets the color precision.</param>
+/// <param name="model">Model string (e.g. 4.26, 4.25, 4.6, 4.0).</param>
+/// <param name="num">Numerator for output FPS.</param>
+/// <param name="den">Denominator for output FPS.</param>
+/// <param name="scale">Scale factor for optical flow processing.</param>
+/// <param name="sc">Scene change detection (True/False).</param>
+/// <param name="trt">TensorRT acceleration (True/False).</param>
 /// <returns>String representation of the argument.</returns>
-QString VapourSynth::rifeCuda(int id, double model, int num, int den, double scale, QString sc, QString trt) {
-	if (model == 4.0)
-		return(QString("clip = RIFE(clip, device_index=%1, model=%2, fps_num=%3, fps_den=%4, scale=%5, ensemble=True, sc=%6)\n\n").arg(id).arg(model).arg(num).arg(den).arg(scale).arg(sc));
-	else
-		return(QString("clip = RIFE(clip, device_index=%1, cuda_graphs=True, model=%2, fps_num=%3, fps_den=%4, scale=%5, ensemble=True, sc=%6)\n\n").arg(id).arg(model).arg(num).arg(den).arg(scale).arg(sc));
+QString VapourSynth::rifeCuda(int id, QString model, int num, int den, double scale, QString sc, QString trt) {
+	QString trtOpt;
+	if (trt == QString("True") && model != QString("4.0") && model != QString("4.1"))
+		trtOpt = QString(", trt=True");
+	return(QString("clip = RIFE(clip, device_index=%1, model='%2', auto_download=True, fps_num=%3, fps_den=%4, scale=%5, sc=%6%7)\n\n")
+		.arg(id).arg(model).arg(num).arg(den).arg(scale).arg(sc).arg(trtOpt));
 }
 #endif
 

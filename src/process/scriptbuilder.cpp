@@ -20,7 +20,7 @@
 QString ScriptBuilder::_scriptList;
 
 #ifdef Q_OS_WINDOWS
-void ScriptBuilder::setRIFECuda(int id, double model, int num, int den, double scale, QString sc, QString trt) {
+void ScriptBuilder::setRIFECuda(int id, QString model, int num, int den, double scale, QString sc, QString trt) {
 	_scriptList.append(VapourSynth::rifeCuda(id, model, num, den, scale, sc, trt));
 }
 #endif

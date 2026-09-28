@@ -1570,7 +1570,7 @@ public:
         RIFEModelCADD->addItem(QString());
         RIFEModelCADD->addItem(QString());
         RIFEModelCADD->setObjectName(QString::fromUtf8("RIFEModelCADD"));
-        RIFEModelCADD->setGeometry(QRect(437, 87, 54, 22));
+        RIFEModelCADD->setGeometry(QRect(226, 87, 265, 22));
         ShaderDD = new QComboBox(InterpolationCB);
         ShaderDD->addItem(QString());
         ShaderDD->addItem(QString());
@@ -3752,7 +3752,7 @@ public:
         RIFEModelCADD->setItemText(1, QCoreApplication::translate("EncodeGUIMV", "v4.6", nullptr));
 
 #if QT_CONFIG(tooltip)
-        RIFEModelCADD->setToolTip(QCoreApplication::translate("EncodeGUIMV", "Sets the RIFE model to use for CUDA.", nullptr));
+        RIFEModelCADD->setToolTip(QCoreApplication::translate("EncodeGUIMV", "Sets the RIFE model to use for CUDA (HolyWu vs-rife).", nullptr));
 #endif // QT_CONFIG(tooltip)
         ShaderDD->setItemText(0, QCoreApplication::translate("EncodeGUIMV", "1", nullptr));
         ShaderDD->setItemText(1, QCoreApplication::translate("EncodeGUIMV", "2", nullptr));
