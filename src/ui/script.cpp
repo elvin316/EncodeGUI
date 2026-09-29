@@ -274,7 +274,8 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 			#ifdef Q_OS_WINDOWS
 			case 0:
 				if (_ui->ToolInterpDD->currentIndex() == 1) {
-					ScriptBuilder::setRIFECuda(id, model3Str, num, den, scale, sc, QString("False"));
+					QString trt = CHECKED(_ui->TensorRTCB) ? QString("True") : QString("False");
+					ScriptBuilder::setRIFECuda(id, model3Str, num, den, scale, sc, trt);
 				}
 				else
 					if (model2 == 0)

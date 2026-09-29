@@ -241,6 +241,7 @@ public:
     QComboBox* GPUInterpDD;
     QLabel* GPUThreadInterpLabel;
     QComboBox* GPUThreadDD;
+    QCheckBox* TensorRTCB;
     QLabel* ModelInterpLabel;
     QComboBox* ModelInterpDD;
     QCheckBox* SceneChangeCB;
@@ -1450,6 +1451,10 @@ public:
         GPUThreadDD->setObjectName(QString::fromUtf8("GPUThreadDD"));
         GPUThreadDD->setEnabled(false);
         GPUThreadDD->setGeometry(QRect(454, 56, 37, 22));
+        TensorRTCB = new QCheckBox(InterpolationCB);
+        TensorRTCB->setObjectName(QString::fromUtf8("TensorRTCB"));
+        TensorRTCB->setGeometry(QRect(380, 56, 110, 22));
+        TensorRTCB->setChecked(false);
         ModelInterpLabel = new QLabel(InterpolationCB);
         ModelInterpLabel->setObjectName(QString::fromUtf8("ModelInterpLabel"));
         ModelInterpLabel->setGeometry(QRect(23, 88, 52, 16));
@@ -2869,7 +2874,8 @@ public:
         QWidget::setTabOrder(OutputFPSNUD, BackendDD);
         QWidget::setTabOrder(BackendDD, RIFEModelVKDD);
         QWidget::setTabOrder(RIFEModelVKDD, RIFEModelCADD);
-        QWidget::setTabOrder(RIFEModelCADD, ShaderDD);
+        QWidget::setTabOrder(RIFEModelCADD, TensorRTCB);
+        QWidget::setTabOrder(TensorRTCB, ShaderDD);
         QWidget::setTabOrder(ShaderDD, ParamsCB);
         QWidget::setTabOrder(ParamsCB, InterpModeDD);
         QWidget::setTabOrder(InterpModeDD, ArtefactMaskDD);
@@ -3643,6 +3649,10 @@ public:
 
 #if QT_CONFIG(tooltip)
         GPUThreadDD->setToolTip(QCoreApplication::translate("EncodeGUIMV", "Sets the number of GPU threads for NCNN interpolation.", nullptr));
+#endif // QT_CONFIG(tooltip)
+        TensorRTCB->setText(QCoreApplication::translate("EncodeGUIMV", "TensorRT", nullptr));
+#if QT_CONFIG(tooltip)
+        TensorRTCB->setToolTip(QCoreApplication::translate("EncodeGUIMV", "Enables TensorRT hardware acceleration for RIFE CUDA on NVIDIA RTX GPUs.", nullptr));
 #endif // QT_CONFIG(tooltip)
         ModelInterpLabel->setText(QCoreApplication::translate("EncodeGUIMV", "Model:", nullptr));
         ModelInterpDD->setItemText(0, QCoreApplication::translate("EncodeGUIMV", "Fastest", nullptr));

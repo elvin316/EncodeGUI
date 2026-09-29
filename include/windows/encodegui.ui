@@ -4048,6 +4048,25 @@
             </property>
            </item>
           </widget>
+          <widget class="QCheckBox" name="TensorRTCB">
+           <property name="geometry">
+            <rect>
+             <x>380</x>
+             <y>56</y>
+             <width>110</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="toolTip">
+            <string>Enables TensorRT hardware acceleration for RIFE CUDA on NVIDIA RTX GPUs.</string>
+           </property>
+           <property name="text">
+            <string>TensorRT</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
           <widget class="QLabel" name="ModelInterpLabel">
            <property name="geometry">
             <rect>
@@ -9752,6 +9771,7 @@
   <tabstop>BackendDD</tabstop>
   <tabstop>RIFEModelVKDD</tabstop>
   <tabstop>RIFEModelCADD</tabstop>
+  <tabstop>TensorRTCB</tabstop>
   <tabstop>ShaderDD</tabstop>
   <tabstop>ParamsCB</tabstop>
   <tabstop>InterpModeDD</tabstop>

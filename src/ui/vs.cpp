@@ -279,6 +279,20 @@ void EncodeGUI::modelVK() {
 
         SET_ENABLED(_ui->OutputFPSNUD);
     }
+
+    #ifdef Q_OS_WINDOWS
+    if (_ui->BackendDD->currentIndex() == 0 && _ui->ToolInterpDD->currentIndex() == 1) {
+        QString currentCudaModel = _ui->RIFEModelCADD->currentData().isValid()
+            ? _ui->RIFEModelCADD->currentData().toString()
+            : _ui->RIFEModelCADD->currentText().remove(QString("v"));
+        if (currentCudaModel == QString("4.0") || currentCudaModel == QString("4.1")) {
+            SET_DISABLED(_ui->TensorRTCB);
+            _ui->TensorRTCB->setChecked(false);
+        } else {
+            SET_ENABLED(_ui->TensorRTCB);
+        }
+    }
+    #endif
 }
 
 #ifdef Q_OS_WINDOWS
@@ -290,6 +304,8 @@ void EncodeGUI::hideInterpGpuCB() {
         _ui->UseGPUCB->setChecked(true);
         SET_DISABLED(_ui->UseGPUCB);
         SET_DISABLED(_ui->GPUThreadDD);
+        SET_INVISIBLE(_ui->GPUThreadInterpLabel);
+        SET_INVISIBLE(_ui->GPUThreadDD);
         SET_INVISIBLE(_ui->Times2Label);
         SET_INVISIBLE(_ui->EqualsLabel);
         SET_ENABLED(_ui->OutputFPSNUD);
@@ -297,8 +313,11 @@ void EncodeGUI::hideInterpGpuCB() {
         if (_ui->ToolInterpDD->currentIndex() != 0) {
             SET_VISIBLE(_ui->RIFEModelCADD);
             SET_INVISIBLE(_ui->RIFEModelVKDD);
+            SET_VISIBLE(_ui->TensorRTCB);
+            SET_ENABLED(_ui->TensorRTCB);
         }
         else if (_ui->ToolInterpDD->currentIndex() == 0) {
+            SET_INVISIBLE(_ui->TensorRTCB);
             _ui->ModelInterpDD->removeItem(2);
             _ui->ModelInterpDD->setCurrentIndex(0);
         }
@@ -307,6 +326,7 @@ void EncodeGUI::hideInterpGpuCB() {
 
         break;
     case 1:
+        SET_INVISIBLE(_ui->TensorRTCB);
         if (_ui->ToolInterpDD->currentIndex() != 0) {
             SET_INVISIBLE(_ui->RIFEModelCADD);
             SET_VISIBLE(_ui->RIFEModelVKDD);
@@ -324,6 +344,8 @@ void EncodeGUI::hideInterpGpuCB() {
             modelVK();
         }
 
+        SET_VISIBLE(_ui->GPUThreadInterpLabel);
+        SET_VISIBLE(_ui->GPUThreadDD);
         SET_ENABLED(_ui->GPUThreadDD);
 
         _ui->BackendDD->removeItem(2);
@@ -349,6 +371,7 @@ void EncodeGUI::toolInterp() {
         SET_INVISIBLE(_ui->ParamsCB);
         SET_INVISIBLE(_ui->InterpModeLabel);
         SET_INVISIBLE(_ui->RIFEModelCADD);
+        SET_INVISIBLE(_ui->TensorRTCB);
         SET_INVISIBLE(_ui->ShaderLabel);
         SET_INVISIBLE(_ui->ShaderDD);
         SET_INVISIBLE(_ui->InterpModeDD);
@@ -421,6 +444,7 @@ void EncodeGUI::toolInterp() {
         SET_VISIBLE(_ui->ArtefactMaskLabel);
         SET_VISIBLE(_ui->ArtefactMaskDD);
         SET_INVISIBLE(_ui->RIFEModelCADD);
+        SET_INVISIBLE(_ui->TensorRTCB);
         SET_INVISIBLE(_ui->ModelInterpDD);
 
         _ui->BackendDD->addItem(QString("OpenCL"));
