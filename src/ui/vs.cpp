@@ -185,26 +185,49 @@ void EncodeGUI::refreshRifeModels() {
         "4.25.heavy", "4.26", "4.26.heavy"
     };
 
+    QString appDir = QCoreApplication::applicationDirPath();
+    QString curDir = QDir::currentPath();
+
     QStringList cudaSearchDirs;
-    cudaSearchDirs << QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife\\models"));
-    cudaSearchDirs << QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife"));
-    cudaSearchDirs << QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\Lib\\site-packages\\vsrife\\models"));
+    cudaSearchDirs << QDir::cleanPath(appDir + "/vs/vsrife/models");
+    cudaSearchDirs << QDir::cleanPath(curDir + "/vs/vsrife/models");
+    cudaSearchDirs << QDir::cleanPath(appDir + "/vs/vsrife");
+    cudaSearchDirs << QDir::cleanPath(curDir + "/vs/vsrife");
+    cudaSearchDirs << QDir::cleanPath(appDir + "/vs/Lib/site-packages/vsrife/models");
+    cudaSearchDirs << QDir::cleanPath(curDir + "/vs/Lib/site-packages/vsrife/models");
+    cudaSearchDirs << QDir::cleanPath(appDir + "/vs/models");
+    cudaSearchDirs << QDir::cleanPath(curDir + "/vs/models");
+    cudaSearchDirs.removeDuplicates();
 
     QStringList detectedCudaModels;
     for (const QString &dirPath : cudaSearchDirs) {
         QDir cDir(dirPath);
         if (cDir.exists()) {
             QStringList filters;
-            filters << QString("flownet_v*.pkl") << QString("flownet_v*.engine");
+            filters << QString("*.pkl") << QString("*.engine");
             QFileInfoList files = cDir.entryInfoList(filters, QDir::Files);
             for (const QFileInfo &f : files) {
                 if (f.size() <= 0) continue;
-                QString fn = f.baseName();
-                if (fn.startsWith(QString("flownet_v"))) {
-                    QString mName = fn.mid(9);
-                    if (!detectedCudaModels.contains(mName)) {
-                        detectedCudaModels.append(mName);
-                    }
+                QString fn = f.fileName();
+                QString mName;
+                if (fn.startsWith(QString("flownet_v"), Qt::CaseInsensitive)) {
+                    mName = fn.mid(9);
+                } else if (fn.startsWith(QString("flownet_"), Qt::CaseInsensitive)) {
+                    mName = fn.mid(8);
+                } else if (fn.startsWith(QString("v"), Qt::CaseInsensitive) && fn.length() > 1 && fn.at(1).isDigit()) {
+                    mName = fn.mid(1);
+                } else {
+                    mName = fn;
+                }
+
+                if (mName.endsWith(QString(".pkl"), Qt::CaseInsensitive)) {
+                    mName.chop(4);
+                } else if (mName.endsWith(QString(".engine"), Qt::CaseInsensitive)) {
+                    mName.chop(7);
+                }
+
+                if (!mName.isEmpty() && !detectedCudaModels.contains(mName)) {
+                    detectedCudaModels.append(mName);
                 }
             }
         }
