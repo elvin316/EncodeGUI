@@ -15,6 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
 
+#include <QtCore/QDir>
+#include <QtCore/QCoreApplication>
 #include "vapoursynth.hpp"
 
 /// <summary>
