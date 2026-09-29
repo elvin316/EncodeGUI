@@ -29,7 +29,27 @@ QString VapourSynth::plugin(QString path) {
 /// </summary>
 QString VapourSynth::include() {
 	#ifdef Q_OS_WINDOWS
-	return(QString("# This file was generated using EncodeGUI\n\ntry:\n    from vsrife import rife as RIFE\nexcept ImportError:\n    try:\n        from vsrife import RIFE\n    except ImportError:\n        pass\nimport tempfile\nimport muvsfunc as mf\nimport vapoursynth as vs\nfrom vapoursynth import core\n\n"));
+	QString vsDir = QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs"));
+	QString siteDir = QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\Lib\\site-packages"));
+	QString vsRifeDir = QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife"));
+	return(QString(
+		"# This file was generated using EncodeGUI\n\n"
+		"import sys, os\n"
+		"for _p in [r'%1', r'%2', r'%3']:\n"
+		"    if os.path.exists(_p) and _p not in sys.path:\n"
+		"        sys.path.insert(0, _p)\n\n"
+		"try:\n"
+		"    from vsrife import rife as RIFE\n"
+		"except ImportError:\n"
+		"    try:\n"
+		"        from vsrife import RIFE\n"
+		"    except ImportError as _e:\n"
+		"        raise ImportError(f\"Could not load RIFE module. Ensure 'vsrife' and 'torch' are installed in the EncodeGUI vs environment: {_e}\")\n\n"
+		"import tempfile\n"
+		"import muvsfunc as mf\n"
+		"import vapoursynth as vs\n"
+		"from vapoursynth import core\n\n"
+	).arg(vsDir).arg(siteDir).arg(vsRifeDir));
 	#endif
 	#ifdef Q_OS_DARWIN
 	return(QString("# This file was generated using EncodeGUI\n\nimport os\nimport muvsfunc as mf\nimport vapoursynth as vs\nfrom vapoursynth import core\n\n"));
