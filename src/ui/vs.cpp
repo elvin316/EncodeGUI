@@ -198,6 +198,7 @@ void EncodeGUI::refreshRifeModels() {
             filters << QString("flownet_v*.pkl") << QString("flownet_v*.engine");
             QFileInfoList files = cDir.entryInfoList(filters, QDir::Files);
             for (const QFileInfo &f : files) {
+                if (f.size() <= 0) continue;
                 QString fn = f.baseName();
                 if (fn.startsWith(QString("flownet_v"))) {
                     QString mName = fn.mid(9);
