@@ -34,9 +34,12 @@ HolyWu `vs-rife` requires PyTorch with CUDA support.
 
 4. Install HolyWu `vsrife` and PyTorch with CUDA:
    ```cmd
-   python.exe -m pip install -U vsrife
+   python.exe -m pip install -U --no-deps vsrife
+   python.exe -m pip install -U numpy requests tqdm
    python.exe -m pip install -U torch torchvision --extra-index-url https://download.pytorch.org/whl/cu124
    ```
+   > **Important:** `--no-deps` is required when installing `vsrife` because EncodeGUI uses a portable VapourSynth runtime (`vapoursynth.cp310-win_amd64.pyd`). Without `--no-deps`, pip attempts to download and compile the generic `vapoursynth` package from PyPI, resulting in `OSError: Couldn't detect vapoursynth installation path`.
+   >
    > **Note:** If your NVIDIA driver does not support CUDA 12.4, you can replace `cu124` with `cu121` or `cu118`.
 
 ---
