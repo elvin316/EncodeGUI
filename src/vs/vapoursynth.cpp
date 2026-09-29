@@ -37,6 +37,11 @@ QString VapourSynth::include() {
 	return(QString(
 		"# This file was generated using EncodeGUI\n\n"
 		"import sys, os\n"
+		"try:\n"
+		"    import site\n"
+		"    site.main()\n"
+		"except Exception:\n"
+		"    pass\n"
 		"for _p in [r'%1', r'%2', r'%3']:\n"
 		"    if os.path.exists(_p) and _p not in sys.path:\n"
 		"        sys.path.insert(0, _p)\n\n"
