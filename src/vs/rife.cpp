@@ -33,7 +33,7 @@ QString VapourSynth::rifeCuda(int id, QString model, int num, int den, double sc
 	QString trtOpt;
 	if (trt == QString("True") && model != QString("4.0") && model != QString("4.1"))
 		trtOpt = QString(", trt=True, trt_cache_dir=_trt_dir");
-	return(QString("clip = RIFE(clip, device_index=%1, model='%2', auto_download=True, fps_num=%3, fps_den=%4, scale=%5, sc=%6%7)\n\n")
+	return(QString("clip = RIFE(clip, device_index=%1, model='%2', auto_download=True, fps_num=%3, fps_den=%4, scale=%5, sc=%6, sc_threshold=None%7)\n\n")
 		.arg(id).arg(model).arg(num).arg(den).arg(scale).arg(sc).arg(trtOpt));
 }
 #endif
