@@ -242,7 +242,23 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 
 		QString fpsString(QString("%1").arg(outFPS));
 
-		if (fpsString.contains(QString("."))) {
+		if (qAbs(outFPS - 59.94) < 0.005) {
+			num = 60000;
+			den = 1001;
+		}
+		else if (qAbs(outFPS - 29.97) < 0.005) {
+			num = 30000;
+			den = 1001;
+		}
+		else if (qAbs(outFPS - 23.976) < 0.005) {
+			num = 24000;
+			den = 1001;
+		}
+		else if (qAbs(outFPS - 119.88) < 0.01) {
+			num = 120000;
+			den = 1001;
+		}
+		else if (fpsString.contains(QString("."))) {
 			switch (decimalCounter(fpsString)) {
 			case 1:
 				den = 10;
@@ -254,12 +270,14 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 				den = 1000;
 				break;
 			}
+			remv = fpsString.remove(QString("."));
+			num = remv.toInt();
 		}
-		else
+		else {
 			den = 1;
-
-		remv = fpsString.remove(QString("."));
-		num = remv.toInt();
+			remv = fpsString.remove(QString("."));
+			num = remv.toInt();
+		}
 
 		if (_ui->ToolInterpDD->currentIndex() == 0 || _ui->ToolInterpDD->currentIndex() == 1) {
 			ScriptBuilder::setRGB(matrix_in, transfer_in, primaries_in);
