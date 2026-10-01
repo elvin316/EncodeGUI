@@ -246,6 +246,10 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 			num = 60000;
 			den = 1001;
 		}
+		else if (qAbs(outFPS - 47.952) < 0.005) {
+			num = 48000;
+			den = 1001;
+		}
 		else if (qAbs(outFPS - 29.97) < 0.005) {
 			num = 30000;
 			den = 1001;
