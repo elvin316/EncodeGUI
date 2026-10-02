@@ -39,6 +39,11 @@ QString VapourSynth::include() {
 		"import sys, os, tempfile, logging\n"
 		"sys.stdout = sys.stderr\n"
 		"try:\n"
+		"    _old_stdout_fd = os.dup(1)\n"
+		"    os.dup2(2, 1)\n"
+		"except Exception:\n"
+		"    _old_stdout_fd = None\n"
+		"try:\n"
 		"    import ctypes\n"
 		"    ctypes.windll.kernel32.SetErrorMode(0x8001)\n"
 		"except Exception:\n"
@@ -255,7 +260,11 @@ QString VapourSynth::scDetect(QString threshold) {
 /// </summary>
 /// <returns>String representation of the script.</returns>
 QString VapourSynth::concludeClip() {
+#ifdef Q_OS_WINDOWS
+	return(QString("try:\n    if '_old_stdout_fd' in globals() and _old_stdout_fd is not None:\n        os.dup2(_old_stdout_fd, 1)\n        os.close(_old_stdout_fd)\nexcept Exception:\n    pass\nclip.set_output()"));
+#else
 	return(QString("clip.set_output()"));
+#endif
 }
 
 /// <summary>

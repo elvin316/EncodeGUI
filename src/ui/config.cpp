@@ -325,6 +325,8 @@ QStringList EncodeGUI::configureArgs(QString input, int index, QString container
 		MediaConfig::setNoAutoRotate();
 
 	#ifdef Q_OS_WINDOWS
+	MediaConfig::append(QString("-f"));
+	MediaConfig::append(QString("yuv4mpegpipe"));
 	MediaConfig::setInput(QString("-"));
 	#endif
 	#ifdef Q_OS_DARWIN
