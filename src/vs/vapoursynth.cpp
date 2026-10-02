@@ -174,6 +174,8 @@ QString VapourSynth::include() {
 		"        if _req_trt and (not hasattr(torch, 'export') or not hasattr(torch.export, 'export')):\n"
 		"            kwargs['trt'] = False\n"
 		"            kwargs.pop('trt_cache_dir', None)\n"
+		"        elif _req_trt:\n"
+		"            kwargs.setdefault('trt_static_shape', True)\n"
 		"        if kwargs.get('fps_num') and kwargs.get('fps_den'):\n"
 		"            from fractions import Fraction\n"
 		"            _f_num = kwargs.pop('fps_num')\n"
