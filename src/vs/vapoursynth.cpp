@@ -36,7 +36,8 @@ QString VapourSynth::include() {
 	QString vsRifeDir = QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\vsrife"));
 	return(QString(
 		"# This file was generated using EncodeGUI\n\n"
-		"import sys, os, tempfile\n"
+		"import sys, os, tempfile, logging\n"
+		"sys.stdout = sys.stderr\n"
 		"try:\n"
 		"    import ctypes\n"
 		"    ctypes.windll.kernel32.SetErrorMode(0x8001)\n"
@@ -106,6 +107,9 @@ QString VapourSynth::include() {
 		"    import torch_tensorrt\n"
 		"    if not hasattr(torch_tensorrt, '__version__'):\n"
 		"        torch_tensorrt.__version__ = '2.0.0'\n"
+		"    if hasattr(torch_tensorrt, 'logging') and hasattr(torch_tensorrt.logging, 'set_reportable_log_level'):\n"
+		"        torch_tensorrt.logging.set_reportable_log_level(torch_tensorrt.logging.Level.Error)\n"
+		"    logging.getLogger('torch_tensorrt').setLevel(logging.ERROR)\n"
 		"except Exception:\n"
 		"    pass\n\n"
 		"try:\n"
