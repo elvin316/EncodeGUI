@@ -349,6 +349,9 @@ private slots:
     void checkGPU();
     void dualGPU();
     void cpuThread();
+    void cpuThreadCount();
+    void vsThreadsChanged();
+    void vsCacheChanged();
     void vkFinished();
     void hdwr264();
     void hdwr265();

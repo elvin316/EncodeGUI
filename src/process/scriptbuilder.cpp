@@ -85,8 +85,8 @@ void ScriptBuilder::setInput(QString path, QString id) {
 	_scriptList.append(VapourSynth::input(path, id));
 }
 
-void ScriptBuilder::setInclude() {
-	_scriptList.append(VapourSynth::include());
+void ScriptBuilder::setInclude(int threads, int cacheSize) {
+	_scriptList.append(VapourSynth::include(threads, cacheSize));
 }
 
 void ScriptBuilder::setConcludeClip() {

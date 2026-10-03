@@ -37,6 +37,9 @@ void EncodeGUI::loadSysSetting() {
 	_ui->GPU1IDNUD->setValue(sys.value(QString("gpu1"), 0).toInt());
 	_ui->GPU2IDNUD->setValue(sys.value(QString("gpu2"), 1).toInt());
 	_ui->LimitThreadsCB->setChecked(sys.value(QString("threads"), false).toBool());
+	_ui->LimitThreadsNUD->setValue(sys.value(QString("threads_count"), _ui->LimitThreadsNUD->maximum()).toInt());
+	_ui->VSThreadsNUD->setValue(sys.value(QString("vs_threads"), 0).toInt());
+	_ui->VSCacheNUD->setValue(sys.value(QString("vs_cache"), 0).toInt());
 	_vapourScript = sys.value(QString("vs"), QVariantList()).toList();
 	#endif
 

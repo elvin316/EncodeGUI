@@ -43,7 +43,7 @@ public:
 	static void setPlugin(QString path);
 	static void setInput(QString path, QString id);
 	static void setAntiA();
-	static void setInclude();
+	static void setInclude(int threads = 0, int cacheSize = 0);
 	static void setConcludeClip();
 	static void setNewLine();
 	static void clearScript();

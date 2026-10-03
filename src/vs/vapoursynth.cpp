@@ -29,7 +29,7 @@ QString VapourSynth::plugin(QString path) {
 /// <summary>
 /// Includes required python nodes.
 /// </summary>
-QString VapourSynth::include() {
+QString VapourSynth::include(int threads, int cacheSize) {
 	#ifdef Q_OS_WINDOWS
 	QString vsDir = QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs"));
 	QString siteDir = QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + QString("\\vs\\Lib\\site-packages"));
@@ -224,11 +224,35 @@ QString VapourSynth::include() {
 		"        raise ImportError(f\"Could not load RIFE module. Ensure 'vsrife' and 'torch' are installed in the EncodeGUI vs environment: {_e}\")\n\n"
 		"import muvsfunc as mf\n"
 		"import vapoursynth as vs\n"
-		"from vapoursynth import core\n\n"
-	).arg(vsDir).arg(siteDir).arg(vsRifeDir));
+		"from vapoursynth import core\n"
+		"try:\n"
+		"    _num_threads = int(os.getenv(\"EG_VS_THREADS\", \"%4\"))\n"
+		"    if _num_threads > 0:\n"
+		"        core.num_threads = _num_threads\n"
+		"    _cache_size = int(os.getenv(\"EG_VS_CACHE\", \"%5\"))\n"
+		"    if _cache_size > 0:\n"
+		"        core.max_cache_size = _cache_size\n"
+		"except Exception:\n"
+		"    pass\n\n"
+	).arg(vsDir).arg(siteDir).arg(vsRifeDir).arg(threads).arg(cacheSize));
 	#endif
 	#ifdef Q_OS_DARWIN
-	return(QString("# This file was generated using EncodeGUI\n\nimport os\nimport muvsfunc as mf\nimport vapoursynth as vs\nfrom vapoursynth import core\n\n"));
+	return(QString(
+		"# This file was generated using EncodeGUI\n\n"
+		"import os\n"
+		"import muvsfunc as mf\n"
+		"import vapoursynth as vs\n"
+		"from vapoursynth import core\n\n"
+		"try:\n"
+		"    _num_threads = int(os.getenv(\"EG_VS_THREADS\", \"%1\"))\n"
+		"    if _num_threads > 0:\n"
+		"        core.num_threads = _num_threads\n"
+		"    _cache_size = int(os.getenv(\"EG_VS_CACHE\", \"%2\"))\n"
+		"    if _cache_size > 0:\n"
+		"        core.max_cache_size = _cache_size\n"
+		"except Exception:\n"
+		"    pass\n\n"
+	).arg(threads).arg(cacheSize));
 	#endif
 }
 

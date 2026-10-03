@@ -40,7 +40,7 @@ protected:
 	static QString scDetect(QString threshold);
 	static QString plugin(QString path);
 	static QString input(QString path, QString id);
-	static QString include();
+	static QString include(int threads = 0, int cacheSize = 0);
 	static QString antiA();
 	static QString concludeClip();
 	static QString newLine();

@@ -8214,9 +8214,9 @@
         <property name="geometry">
          <rect>
           <x>12</x>
-          <y>71</y>
+          <y>67</y>
           <width>522</width>
-          <height>145</height>
+          <height>136</height>
          </rect>
         </property>
         <property name="title">
@@ -8235,7 +8235,7 @@
          <property name="geometry">
           <rect>
            <x>14</x>
-           <y>110</y>
+           <y>95</y>
            <width>492</width>
            <height>24</height>
           </rect>
@@ -8248,7 +8248,7 @@
          <property name="geometry">
           <rect>
            <x>457</x>
-           <y>28</y>
+           <y>23</y>
            <width>49</width>
            <height>22</height>
           </rect>
@@ -8261,7 +8261,7 @@
          <property name="geometry">
           <rect>
            <x>457</x>
-           <y>68</y>
+           <y>55</y>
            <width>49</width>
            <height>22</height>
           </rect>
@@ -8274,7 +8274,7 @@
          <property name="geometry">
           <rect>
            <x>16</x>
-           <y>31</y>
+           <y>26</y>
            <width>71</width>
            <height>16</height>
           </rect>
@@ -8287,13 +8287,96 @@
          <property name="geometry">
           <rect>
            <x>16</x>
-           <y>70</y>
+           <y>58</y>
            <width>65</width>
            <height>16</height>
           </rect>
          </property>
          <property name="text">
           <string>GPU #2 ID:</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="VapourSettingsGB">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>207</y>
+          <width>523</width>
+          <height>76</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>VapourSynth Settings</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <widget class="QLabel" name="VSThreadsLabel">
+         <property name="geometry">
+          <rect>
+           <x>16</x>
+           <y>22</y>
+           <width>320</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>VapourSynth worker threads (0 = auto):</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="VSThreadsNUD">
+         <property name="geometry">
+          <rect>
+           <x>458</x>
+           <y>19</y>
+           <width>49</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Number of VapourSynth worker threads. 0 = auto (2 for 4K/UHD to prevent VRAM overflow, 4 for 1080p).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="maximum">
+          <number>64</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+        <widget class="QLabel" name="VSCacheLabel">
+         <property name="geometry">
+          <rect>
+           <x>16</x>
+           <y>48</y>
+           <width>320</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>VapourSynth frame cache in MB (0 = auto):</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="VSCacheNUD">
+         <property name="geometry">
+          <rect>
+           <x>438</x>
+           <y>45</y>
+           <width>69</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;VapourSynth frame cache size limit in MB. 0 = auto (2048 MB for 4K/UHD, 4096 MB for 1080p).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="maximum">
+          <number>65536</number>
+         </property>
+         <property name="singleStep">
+          <number>512</number>
+         </property>
+         <property name="value">
+          <number>0</number>
          </property>
         </widget>
        </widget>
@@ -9841,6 +9924,8 @@
   <tabstop>PercentageCB</tabstop>
   <tabstop>LimitThreadsNUD</tabstop>
   <tabstop>LimitThreadsCB</tabstop>
+  <tabstop>VSThreadsNUD</tabstop>
+  <tabstop>VSCacheNUD</tabstop>
   <tabstop>ClearJobsBttn</tabstop>
   <tabstop>CancelQueueBttn</tabstop>
   <tabstop>LogsOutRTxtBox</tabstop>

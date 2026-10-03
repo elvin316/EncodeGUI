@@ -150,7 +150,22 @@ QString EncodeGUI::buildScript(QString input, QString matrix, QString transfer, 
 		primaries_in = _ui->InputPrimsDD->currentText().toLower().remove(QString("bt"));
 	}
 
-	ScriptBuilder::setInclude();
+	#ifdef Q_OS_WINDOWS
+	int vsThreads = _ui->VSThreadsNUD->value();
+	int vsCache = _ui->VSCacheNUD->value();
+	#else
+	int vsThreads = 0;
+	int vsCache = 0;
+	#endif
+
+	if (vsThreads <= 0) {
+		vsThreads = (height >= 1440 || width >= 2560) ? 2 : 4;
+	}
+	if (vsCache <= 0) {
+		vsCache = (height >= 1440 || width >= 2560) ? 2048 : 4096;
+	}
+
+	ScriptBuilder::setInclude(vsThreads, vsCache);
 
 	#ifdef Q_OS_WINDOWS
 	ScriptBuilder::setPlugin(QDir::toNativeSeparators(QApplication::applicationDirPath() + QString("\\vs\\plugins\\liblsmashsource.dll")));

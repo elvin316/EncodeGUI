@@ -792,6 +792,12 @@ QStringList EncodeGUI::configureArgs(QString input, int index, QString container
 				MediaConfig::setConcludeFilters();
 	}
 
+	#ifdef Q_OS_WINDOWS
+	if (CHECKED(_ui->LimitThreadsCB)) {
+		MediaConfig::setThreads(_ui->LimitThreadsNUD->value());
+	}
+	#endif
+
 	if (twoPass) {
 		if (_ui->VideoEncDD->currentIndex() != 1) {
 			#ifdef Q_OS_WINDOWS

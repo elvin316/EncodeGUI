@@ -114,6 +114,9 @@ EncodeGUI::EncodeGUI(QWidget *parent) : QMainWindow(parent) {
     connect(_ui->EncodeMode265HWDD, SIGNAL(currentIndexChanged(int)), this, SLOT(mode265()));
     connect(_ui->Hardware265CB, SIGNAL(stateChanged(int)), this, SLOT(hdwr265()));
     connect(_ui->LimitThreadsCB, SIGNAL(stateChanged(int)), this, SLOT(cpuThread()));
+    connect(_ui->LimitThreadsNUD, SIGNAL(valueChanged(int)), this, SLOT(cpuThreadCount()));
+    connect(_ui->VSThreadsNUD, SIGNAL(valueChanged(int)), this, SLOT(vsThreadsChanged()));
+    connect(_ui->VSCacheNUD, SIGNAL(valueChanged(int)), this, SLOT(vsCacheChanged()));
     connect(_ui->EncodeMode264HWDD, SIGNAL(currentIndexChanged(int)), this, SLOT(mode264()));
     connect(_ui->Hardware264CB, SIGNAL(stateChanged(int)), this, SLOT(hdwr264()));
     connect(_ui->ParamsCB, SIGNAL(stateChanged(int)), this, SLOT(hideParams()));
@@ -2680,6 +2683,18 @@ void EncodeGUI::cpuThread() {
         SET_ENABLED(_ui->LimitThreadsNUD);
     else
         SET_DISABLED(_ui->LimitThreadsNUD);
+}
+
+void EncodeGUI::cpuThreadCount() {
+    QSettings(QSettings::NativeFormat, QSettings::UserScope, QString("DaGoose"), QString("EncodeGUI")).setValue(QString("threads_count"), _ui->LimitThreadsNUD->value());
+}
+
+void EncodeGUI::vsThreadsChanged() {
+    QSettings(QSettings::NativeFormat, QSettings::UserScope, QString("DaGoose"), QString("EncodeGUI")).setValue(QString("vs_threads"), _ui->VSThreadsNUD->value());
+}
+
+void EncodeGUI::vsCacheChanged() {
+    QSettings(QSettings::NativeFormat, QSettings::UserScope, QString("DaGoose"), QString("EncodeGUI")).setValue(QString("vs_cache"), _ui->VSCacheNUD->value());
 }
 #endif
 
